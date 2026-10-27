@@ -9,9 +9,9 @@
 <meta name="theme-color" content="#f7f0e6">
 <meta property="og:title" content="La liste de bébé">
 <meta property="og:description" content="Petit frère d'Ellie · arrivée prévue le 28 janvier 2027">
-<meta property="og:image" content="https://tweekdev.github.io/liste-bebe/img/apercu.jpg">
+<meta property="og:image" content="https://tweekdev.github.io/liste-bebe/img/apercu.jpg?v=2">
 <meta property="og:url" content="https://tweekdev.github.io/liste-bebe/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦔</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐻</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,900&family=Quicksand:wght@400;600&display=swap">
@@ -26,6 +26,7 @@
   --argile: #c47a58;
   --sauge: #6f8463;
   --sauge-clair: #b8c3a9;
+  --sauge-fonce: #56694b;
   --moutarde: #d9a35b;
   --blob: #ebd2b1;
   --ombre: 0 8px 18px rgba(74, 56, 45, .13);
@@ -34,16 +35,25 @@
   --texte: "Quicksand", system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; touch-action: manipulation; }
 body {
   margin: 0;
   background: var(--fond);
   color: var(--encre);
-  font: 400 15px/1.6 var(--texte);
+  font: 400 16px/1.6 var(--texte);
   overflow-x: hidden;
 }
-a { color: inherit; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+a { color: inherit; -webkit-tap-highlight-color: rgba(165, 90, 60, .15); }
 a:focus-visible { outline: 2px dashed var(--brique); outline-offset: 3px; }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
+.evitement {
+  position: absolute; left: 16px; top: -64px; z-index: 10;
+  padding: 10px 16px; border-radius: 10px;
+  background: var(--brique); color: #fff; font-weight: 600;
+}
+.evitement:focus { top: 12px; }
 .page { position: relative; max-width: 960px; margin: 0 auto; padding: 0 16px 48px; }
 
 /* décor */
@@ -59,7 +69,7 @@ main, header, footer { position: relative; z-index: 1; }
 
 /* en-tête */
 .entete { text-align: center; padding-top: 56px; }
-.surtitre { margin: 0; font: 400 1.45rem var(--manuscrit); color: var(--sauge); }
+.surtitre { margin: 0; font: 400 1.45rem var(--manuscrit); color: var(--sauge-fonce); }
 h1 {
   margin: 0;
   font: italic 900 clamp(2.6rem, 9vw, 4.4rem)/1.05 var(--titre);
@@ -68,7 +78,8 @@ h1 {
 }
 .sous-titre { margin: 10px 0 0; font-weight: 600; letter-spacing: .02em; font-size: 1.05rem; }
 .sous-titre strong { color: var(--argile); }
-.herissons { width: min(370px, 80%); margin: 28px auto 24px; }
+.sous-titre span { display: inline-block; }
+.ours { width: min(430px, 88%); margin: 22px auto 18px; }
 .intro { max-width: 690px; margin: 0 auto; font-size: 1rem; }
 
 /* cagnotte */
@@ -95,20 +106,22 @@ h1 {
   text-align: center;
 }
 .qr::before { --scotch: #efd2c2; }
-.qr span { font: 600 1.05rem var(--manuscrit); color: var(--sauge); }
+.qr span { font: 600 1.05rem var(--manuscrit); color: var(--sauge-fonce); }
 
 .participer {
-  display: inline-block;
-  padding: 9px 20px;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px;
+  padding: 10px 22px;
   border-radius: 999px;
   background: var(--brique);
   color: #fff;
   font-weight: 600;
   text-decoration: none;
-  transition: background .2s;
+  transition: background-color .2s, transform .15s;
 }
 .participer:hover { background: #8c4a30; }
-.participer.petit { padding: 5px 14px; font-size: .88rem; }
+.participer:active { transform: scale(.97); }
+.participer.petit { min-height: 40px; padding: 8px 18px; font-size: .9rem; }
 
 /* sections */
 section { margin-top: 64px; }
@@ -163,11 +176,11 @@ section { margin-top: 64px; }
 .article:nth-child(4n) .polaroid { --scotch: #d3c4ae; }
 .article .polaroid:hover { transform: rotate(0) translateY(-3px); }
 .badge {
-  position: absolute; top: 18px; right: -14px;
+  position: absolute; top: 18px; right: -6px;
   display: grid; place-items: center;
-  width: 62px; height: 62px; border-radius: 50%;
-  background: var(--moutarde); color: #fff;
-  font: 600 1.15rem var(--manuscrit);
+  width: 66px; height: 66px; border-radius: 50%;
+  background: var(--moutarde); color: var(--encre);
+  font: 600 1.2rem/.95 var(--manuscrit); text-align: center;
   transform: rotate(14deg);
 }
 
@@ -180,7 +193,7 @@ section { margin-top: 64px; }
 .variante {
   margin: 4px 0 6px;
   font-size: .74rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--sauge);
+  color: var(--sauge-fonce);
 }
 .desc { margin: 0 0 12px; color: var(--encre-douce); font-size: .92rem; line-height: 1.55; }
 .actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: auto; }
@@ -197,16 +210,16 @@ section { margin-top: 64px; }
 }
 .carte h3 { margin-top: 0; font-size: 1.3rem; }
 .carte-tete { display: flex; justify-content: space-between; gap: 18px; }
-.carte-tete .estimation { text-align: right; font-family: var(--manuscrit); color: var(--argile); white-space: nowrap; }
-.carte-tete .estimation b { display: block; font-size: 2rem; line-height: 1; font-weight: 600; }
-.minis { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 18px; margin: 22px 0 20px; }
+.carte-tete .estimation { margin: 0; text-align: right; font: 400 1.15rem var(--manuscrit); color: var(--encre-douce); white-space: nowrap; }
+.carte-tete .estimation b { display: block; font-size: 2rem; line-height: 1; font-weight: 600; color: var(--argile); }
+.minis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 18px; margin: 22px 0 20px; }
 .mini {
   position: relative;
   margin: 0;
   padding: 10px 10px 2px;
   background: #fff; box-shadow: 0 4px 10px rgba(74, 56, 45, .1);
   text-align: center;
-  font: 400 1.15rem/1.6 var(--manuscrit); color: var(--argile);
+  font: 400 1.15rem/1.6 var(--manuscrit); color: var(--brique);
 }
 .mini::before { width: 46px; height: 16px; top: -8px; }
 .mini:nth-child(odd) { transform: rotate(-1deg); }
@@ -231,7 +244,7 @@ section { margin-top: 64px; }
 .cahier ul { list-style: none; margin: 0; padding: 0; }
 .cahier li { display: flex; align-items: baseline; gap: 8px; height: 34px; padding-top: 6px; }
 .cahier li span:nth-child(2) { flex: 1; border-bottom: 1.5px dotted #c9b8a8; transform: translateY(-4px); }
-.cahier li b { font: 700 1rem var(--titre); white-space: nowrap; }
+.cahier li b { font: 700 1rem var(--titre); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .total {
   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px;
   margin: 26px 0 6px; padding: 10px 18px;
@@ -245,12 +258,12 @@ section { margin-top: 64px; }
 
 /* merci */
 .merci { text-align: center; margin-top: 72px; }
-.merci .herissons { margin-bottom: 14px; }
+.merci .ours { width: min(320px, 72%); margin-bottom: 12px; }
 .merci h2 { margin: 0 0 10px; font: italic 900 clamp(1.8rem, 6vw, 2.3rem) var(--titre); font-variation-settings: "opsz" 9; color: var(--brique); }
 .merci p { max-width: 560px; margin: 0 auto; }
 .signature { margin-top: 14px !important; font: 400 1.9rem var(--manuscrit); color: var(--argile); }
 .merci .participer { margin-top: 26px; }
-.merci .pied { margin-top: 48px; text-align: center; font: 400 1.1rem var(--manuscrit); color: var(--encre-douce); opacity: .7; }
+.merci .pied { margin-top: 48px; text-align: center; font: 400 1.1rem var(--manuscrit); color: var(--encre-douce); }
 
 @media (max-width: 640px) {
   .deco.feuille-rousse, .deco.petite-feuille, .deco.champignon { display: none; }
@@ -271,34 +284,50 @@ section { margin-top: 64px; }
     var(--papier); }
   .total { justify-content: center; text-align: center; }
   .total p { text-align: center; }
+  .titre-section { gap: 10px; }
+  .titre-section h2 { font-size: 1.6rem; }
+  .vague { min-width: 12px; }
+  .montant { padding: 6px 12px; font-size: 1.3rem; }
+  /* articles en ligne : photo à gauche, texte à droite */
+  .grille, .grille.quatre { grid-template-columns: 1fr; gap: 40px; }
+  .article { display: grid; grid-template-columns: 128px 1fr; column-gap: 18px; align-items: start; }
+  .article .polaroid { grid-row: 1 / 4; padding: 8px 8px 0; }
+  .article .polaroid::before { width: 44px; height: 15px; top: -8px; }
+  .article .polaroid .prix { font-size: 1.3rem; }
+  .article h3 { margin-top: 0; }
+  .article .actions, .grille.quatre .actions { grid-column: 1 / -1; flex-direction: row; align-items: center; margin-top: 14px; }
+  .badge { top: -10px; right: -12px; width: 52px; height: 52px; font-size: 1rem; }
+  .minis { grid-template-columns: repeat(3, 1fr); gap: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .polaroid, .participer { transition: none; }
+  .participer:active { transform: none; }
 }
 </style>
 </head>
 <body>
+<a class="evitement" href="#liste">Aller à la liste</a>
 <div class="page">
-  <img class="deco erable" src="img/erable.png" alt="">
-  <img class="deco feuille-rousse" src="img/feuille-rousse.png" alt="">
-  <img class="deco baies" src="img/baies.png" alt="">
-  <img class="deco petite-feuille" src="img/petite-feuille.png" alt="">
-  <img class="deco feuille-verte" src="img/feuille-verte.png" alt="">
-  <img class="deco chene" src="img/chene.png" alt="">
-  <img class="deco champignon" src="img/champignon.png" alt="">
+  <img class="deco erable" src="img/erable.png" width="187" height="193" alt="">
+  <img class="deco feuille-rousse" src="img/feuille-rousse.png" width="134" height="161" alt="">
+  <img class="deco baies" src="img/baies.png" width="129" height="140" alt="">
+  <img class="deco petite-feuille" src="img/petite-feuille.png" width="99" height="108" alt="">
+  <img class="deco feuille-verte" src="img/feuille-verte.png" width="140" height="128" alt="">
+  <img class="deco chene" src="img/chene.png" width="167" height="156" alt="">
+  <img class="deco champignon" src="img/champignon.png" width="134" height="123" alt="">
 
   <header class="entete">
     <p class="surtitre">liste de naissance · cagnotte Revolut</p>
     <h1>La liste de bébé</h1>
-    <p class="sous-titre">Petit frère d’Ellie · arrivée prévue le <strong>28 janvier 2027</strong></p>
-    <img class="herissons" src="img/herissons.png" alt="Une famille de hérissons qui se promène : papa, maman, Ellie et le petit frère">
-    <p class="intro">Notre petit garçon arrivera au cœur de l’hiver, et notre petite famille de hérissons s’agrandit ! Plutôt qu’une liste classique, nous avons ouvert une <strong>cagnotte Revolut</strong> : chaque participation, petite ou grande, nous aidera à lui offrir ce que vous découvrirez sur cette page. Merci du fond du cœur ♡</p>
+    <p class="sous-titre"><span>Petit frère d’Ellie ·</span> <span>arrivée prévue le <strong>28 janvier 2027</strong></span></p>
+    <img class="ours" src="img/ours.svg" width="800" height="400" fetchpriority="high" alt="Une famille d’ours en écharpes d’hiver : papa, maman, Ellie et le petit frère en bonnet">
+    <p class="intro">Notre petit garçon arrivera au cœur de l’hiver, et notre petite famille d’ours s’agrandit&nbsp;! Plutôt qu’une liste classique, nous avons ouvert une <strong>cagnotte Revolut</strong>&nbsp;: chaque participation, petite ou grande, nous aidera à lui offrir ce que vous découvrirez sur cette page. Merci du fond du cœur ♡</p>
 
     <div class="cagnotte">
       <div class="lien-cagnotte">
         <h2>Lien de la cagnotte</h2>
-        <p><a href="https://revolut.me/theauantoine" target="_blank" rel="noopener">revolut.me/theauantoine</a> · le montant est libre</p>
-        <a class="participer" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer sur Revolut</a>
+        <p><a href="https://revolut.me/theauantoine" target="_blank" rel="noopener" translate="no">revolut.me/theauantoine</a> · le montant est libre</p>
+        <a class="participer" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9" target="_blank" rel="noopener">Participer sur Revolut</a>
       </div>
       <div class="qr">
         <img src="img/qr.svg" alt="QR code vers revolut.me/theauantoine" width="108" height="108">
@@ -307,151 +336,151 @@ section { margin-top: 64px; }
     </div>
   </header>
 
-  <main>
+  <main id="liste">
     <section aria-labelledby="balade">
-      <div class="titre-section"><h2 id="balade">En balade</h2><span class="vague" aria-hidden="true"></span><span class="montant">1 444,64 €</span></div>
+      <div class="titre-section"><h2 id="balade">En balade</h2><span class="vague" aria-hidden="true"></span><span class="montant">1&nbsp;444,64&nbsp;€</span></div>
       <div class="grille">
         <article class="article">
-          <a class="polaroid" href="https://fr.shop-orchestra.com/fr/puericulture/promenade/poussettes-doubles/poussette-gazelle-s-taupe-almond-beige--PPS6LI.html" target="_blank" rel="noopener"><img src="img/poussette.jpg" alt="Poussette Cybex Gazelle S" loading="lazy"><span class="prix">748,99 €</span></a>
+          <a class="polaroid" href="https://fr.shop-orchestra.com/fr/puericulture/promenade/poussettes-doubles/poussette-gazelle-s-taupe-almond-beige--PPS6LI.html" target="_blank" rel="noopener"><img src="img/poussette.jpg" width="640" height="640" alt="Poussette Cybex Gazelle S" loading="lazy"><span class="prix">748,99&nbsp;€</span></a>
           <h3>Poussette Cybex Gazelle S</h3>
           <p class="variante">Almond beige</p>
-          <p class="desc">Notre carrosse familial : simple ou double, elle grandit avec nous pour promener bébé et Ellie ensemble.</p>
-          <div class="actions"><a class="chez" href="https://fr.shop-orchestra.com/fr/puericulture/promenade/poussettes-doubles/poussette-gazelle-s-taupe-almond-beige--PPS6LI.html" target="_blank" rel="noopener">chez Orchestra ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <p class="desc">Notre carrosse familial&nbsp;: simple ou double, elle grandit avec nous pour promener bébé et Ellie ensemble.</p>
+          <div class="actions"><a class="chez" href="https://fr.shop-orchestra.com/fr/puericulture/promenade/poussettes-doubles/poussette-gazelle-s-taupe-almond-beige--PPS6LI.html" target="_blank" rel="noopener">chez Orchestra<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Poussette%20Cybex%20Gazelle%20S" target="_blank" rel="noopener">Participer</a></div>
         </article>
         <article class="article">
-          <a class="polaroid" href="https://www.cybex-online.com/fr/fr/p/10102810.html" target="_blank" rel="noopener"><img src="img/siege2.jpg" alt="2e siège Gazelle S" loading="lazy"><span class="prix">245 €</span></a>
+          <a class="polaroid" href="https://www.cybex-online.com/fr/fr/p/10102810.html" target="_blank" rel="noopener"><img src="img/siege2.jpg" width="640" height="640" alt="2e siège Gazelle S" loading="lazy"><span class="prix">245&nbsp;€</span></a>
           <h3>2e siège Gazelle S</h3>
           <p class="variante">Almond beige</p>
           <p class="desc">La deuxième place à bord, pour que grande sœur et petit frère partent en balade ensemble.</p>
-          <div class="actions"><a class="chez" href="https://www.cybex-online.com/fr/fr/p/10102810.html" target="_blank" rel="noopener">chez Cybex ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <div class="actions"><a class="chez" href="https://www.cybex-online.com/fr/fr/p/10102810.html" target="_blank" rel="noopener">chez Cybex<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%202e%20si%C3%A8ge%20Gazelle%20S" target="_blank" rel="noopener">Participer</a></div>
         </article>
         <article class="article">
-          <a class="polaroid" href="https://www.cybex-online.com/fr/fr/p/10076903.html" target="_blank" rel="noopener"><img src="img/pluie.jpg" alt="Habillage pluie Gazelle S" loading="lazy"><span class="prix">71,80 €</span></a>
+          <a class="polaroid" href="https://www.cybex-online.com/fr/fr/p/10076903.html" target="_blank" rel="noopener"><img src="img/pluie.jpg" width="640" height="640" alt="Habillage pluie Gazelle S" loading="lazy"><span class="prix">71,80&nbsp;€</span></a>
           <h3>2 habillages pluie Gazelle S</h3>
           <p class="variante">Transparent</p>
           <p class="desc">Deux petits imperméables pour braver les averses d’hiver bien au sec.</p>
-          <div class="actions"><a class="chez" href="https://www.cybex-online.com/fr/fr/p/10076903.html" target="_blank" rel="noopener">chez Cybex ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <div class="actions"><a class="chez" href="https://www.cybex-online.com/fr/fr/p/10076903.html" target="_blank" rel="noopener">chez Cybex<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%202%20habillages%20pluie%20Gazelle%20S" target="_blank" rel="noopener">Participer</a></div>
         </article>
         <article class="article">
-          <a class="polaroid" href="https://www.cybex-online.com/fr/fr/p/10076847.html" target="_blank" rel="noopener"><img src="img/adaptateurs.jpg" alt="Adaptateurs cosy Gazelle S" loading="lazy"><span class="prix">39 €</span></a>
+          <a class="polaroid" href="https://www.cybex-online.com/fr/fr/p/10076847.html" target="_blank" rel="noopener"><img src="img/adaptateurs.jpg" width="640" height="640" alt="Adaptateurs cosy Gazelle S" loading="lazy"><span class="prix">39&nbsp;€</span></a>
           <h3>Adaptateurs cosy Gazelle S</h3>
           <p class="variante">Black</p>
           <p class="desc">Pour clipser le cosy de bébé sur la poussette… sans le réveiller.</p>
-          <div class="actions"><a class="chez" href="https://www.cybex-online.com/fr/fr/p/10076847.html" target="_blank" rel="noopener">chez Cybex ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <div class="actions"><a class="chez" href="https://www.cybex-online.com/fr/fr/p/10076847.html" target="_blank" rel="noopener">chez Cybex<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Adaptateurs%20cosy%20Gazelle%20S" target="_blank" rel="noopener">Participer</a></div>
         </article>
         <article class="article">
-          <a class="polaroid" href="https://fr.shop-orchestra.com/fr/puericulture/promenade/chancelieres-couvertures/chancelieres/chanceliere-gold-grey-PPS7LS.html" target="_blank" rel="noopener"><img src="img/chanceliere.jpg" alt="Chancelière Cybex Gold" loading="lazy"><span class="prix">86,90 €</span></a>
+          <a class="polaroid" href="https://fr.shop-orchestra.com/fr/puericulture/promenade/chancelieres-couvertures/chancelieres/chanceliere-gold-grey-PPS7LS.html" target="_blank" rel="noopener"><img src="img/chanceliere.jpg" width="640" height="640" alt="Chancelière Cybex Gold" loading="lazy"><span class="prix">86,90&nbsp;€</span></a>
           <h3>Chancelière Cybex Gold</h3>
           <p class="variante">Grey</p>
           <p class="desc">Un nid douillet tout chaud pour les promenades dans le froid.</p>
-          <div class="actions"><a class="chez" href="https://fr.shop-orchestra.com/fr/puericulture/promenade/chancelieres-couvertures/chancelieres/chanceliere-gold-grey-PPS7LS.html" target="_blank" rel="noopener">chez Orchestra ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <div class="actions"><a class="chez" href="https://fr.shop-orchestra.com/fr/puericulture/promenade/chancelieres-couvertures/chancelieres/chanceliere-gold-grey-PPS7LS.html" target="_blank" rel="noopener">chez Orchestra<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Chanceli%C3%A8re%20Cybex%20Gold" target="_blank" rel="noopener">Participer</a></div>
         </article>
         <article class="article">
-          <a class="polaroid" href="https://www.dreambaby.be/fr/products/cybex-autostoel-sirona-gi-i-size-groep-0-1-magic-black" target="_blank" rel="noopener"><img src="img/siegeauto.jpg" alt="Siège auto Cybex Sirona Gi i-Size" loading="lazy"><span class="prix">252,95 €</span><span class="badge">pour Ellie</span></a>
+          <a class="polaroid" href="https://www.dreambaby.be/fr/products/cybex-autostoel-sirona-gi-i-size-groep-0-1-magic-black" target="_blank" rel="noopener"><img src="img/siegeauto.jpg" width="640" height="640" alt="Siège auto Cybex Sirona Gi i-Size" loading="lazy"><span class="prix">252,95&nbsp;€</span><span class="badge">pour<br>Ellie</span></a>
           <h3>Siège auto Cybex Sirona Gi i-Size</h3>
           <p class="variante">Magic black</p>
-          <p class="desc">Ellie grandit et laisse son cosy à son petit frère : un siège pivotant rien que pour elle.</p>
-          <div class="actions"><a class="chez" href="https://www.dreambaby.be/fr/products/cybex-autostoel-sirona-gi-i-size-groep-0-1-magic-black" target="_blank" rel="noopener">chez Dreambaby ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <p class="desc">Ellie grandit et laisse son cosy à son petit frère&nbsp;: un siège pivotant rien que pour elle.</p>
+          <div class="actions"><a class="chez" href="https://www.dreambaby.be/fr/products/cybex-autostoel-sirona-gi-i-size-groep-0-1-magic-black" target="_blank" rel="noopener">chez Dreambaby<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Si%C3%A8ge%20auto%20Cybex%20Sirona%20Gi%20i-Size" target="_blank" rel="noopener">Participer</a></div>
         </article>
       </div>
     </section>
 
     <section aria-labelledby="dodo">
-      <div class="titre-section"><h2 id="dodo">Doux dodo</h2><span class="vague" aria-hidden="true"></span><span class="montant">94,97 €</span></div>
+      <div class="titre-section"><h2 id="dodo">Doux dodo</h2><span class="vague" aria-hidden="true"></span><span class="montant">94,97&nbsp;€</span></div>
       <div class="grille">
         <article class="article">
-          <a class="polaroid" href="https://jollein.com/fr/products/sleeping-bag-with-removable-sleeves-fluffy" target="_blank" rel="noopener"><img src="img/fluffy.jpg" alt="Gigoteuse Fluffy" loading="lazy"><span class="prix">32,99 €</span></a>
+          <a class="polaroid" href="https://jollein.com/fr/products/sleeping-bag-with-removable-sleeves-fluffy" target="_blank" rel="noopener"><img src="img/fluffy.jpg" width="640" height="443" alt="Gigoteuse Fluffy" loading="lazy"><span class="prix">32,99&nbsp;€</span></a>
           <h3>Gigoteuse Fluffy</h3>
           <p class="variante">Manches amovibles · 60 cm</p>
           <p class="desc">Toute douce comme un nuage, pour des nuits d’hiver bien au chaud.</p>
-          <div class="actions"><a class="chez" href="https://jollein.com/fr/products/sleeping-bag-with-removable-sleeves-fluffy" target="_blank" rel="noopener">chez Jollein ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <div class="actions"><a class="chez" href="https://jollein.com/fr/products/sleeping-bag-with-removable-sleeves-fluffy" target="_blank" rel="noopener">chez Jollein<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Gigoteuse%20Fluffy" target="_blank" rel="noopener">Participer</a></div>
         </article>
         <article class="article">
-          <a class="polaroid" href="https://jollein.com/fr/products/newborn-sleeping-bag-jersey-60cm-soft-twine" target="_blank" rel="noopener"><img src="img/jersey.jpg" alt="Gigoteuse naissance Jersey" loading="lazy"><span class="prix">24,99 €</span></a>
+          <a class="polaroid" href="https://jollein.com/fr/products/newborn-sleeping-bag-jersey-60cm-soft-twine" target="_blank" rel="noopener"><img src="img/jersey.jpg" width="640" height="443" alt="Gigoteuse naissance Jersey" loading="lazy"><span class="prix">24,99&nbsp;€</span></a>
           <h3>Gigoteuse naissance Jersey</h3>
           <p class="variante">Soft twine · 60 cm</p>
           <p class="desc">La toute première gigoteuse, légère et câline, pour les premières semaines.</p>
-          <div class="actions"><a class="chez" href="https://jollein.com/fr/products/newborn-sleeping-bag-jersey-60cm-soft-twine" target="_blank" rel="noopener">chez Jollein ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <div class="actions"><a class="chez" href="https://jollein.com/fr/products/newborn-sleeping-bag-jersey-60cm-soft-twine" target="_blank" rel="noopener">chez Jollein<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Gigoteuse%20naissance%20Jersey" target="_blank" rel="noopener">Participer</a></div>
         </article>
         <article class="article">
-          <a class="polaroid" href="https://jollein.com/fr/products/sleeping-bag-with-removable-sleeves-barn-buddies" target="_blank" rel="noopener"><img src="img/barn.jpg" alt="Gigoteuse Barn Buddies" loading="lazy"><span class="prix">36,99 €</span><span class="badge">pour Ellie</span></a>
+          <a class="polaroid" href="https://jollein.com/fr/products/sleeping-bag-with-removable-sleeves-barn-buddies" target="_blank" rel="noopener"><img src="img/barn.jpg" width="640" height="443" alt="Gigoteuse Barn Buddies" loading="lazy"><span class="prix">36,99&nbsp;€</span><span class="badge">pour<br>Ellie</span></a>
           <h3>Gigoteuse Barn Buddies</h3>
           <p class="variante">Manches amovibles · 90 cm</p>
-          <p class="desc">Pleine de petits animaux de la ferme : grande sœur aussi a droit à sa nouveauté !</p>
-          <div class="actions"><a class="chez" href="https://jollein.com/fr/products/sleeping-bag-with-removable-sleeves-barn-buddies" target="_blank" rel="noopener">chez Jollein ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <p class="desc">Pleine de petits animaux de la ferme&nbsp;: grande sœur aussi a droit à sa nouveauté&nbsp;!</p>
+          <div class="actions"><a class="chez" href="https://jollein.com/fr/products/sleeping-bag-with-removable-sleeves-barn-buddies" target="_blank" rel="noopener">chez Jollein<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Gigoteuse%20Barn%20Buddies" target="_blank" rel="noopener">Participer</a></div>
         </article>
       </div>
     </section>
 
     <section aria-labelledby="vestiaire">
-      <div class="titre-section"><h2 id="vestiaire">Petit vestiaire</h2><span class="vague" aria-hidden="true"></span><span class="montant">≈ 180 €</span></div>
+      <div class="titre-section"><h2 id="vestiaire">Petit vestiaire</h2><span class="vague" aria-hidden="true"></span><span class="montant">≈&nbsp;180&nbsp;€</span></div>
       <div class="carte">
         <div class="carte-tete">
           <div>
             <h3>Premier vestiaire d’hiver</h3>
             <p class="variante">Garçon · naissance à 3 mois · TAO &amp; H&amp;M</p>
-            <p class="desc">Des petites tenues toutes douces pour affronter janvier : bodies, pyjamas, ensemble haut + pantalon tout moelleux, gilet en maille classique et bonnets.</p>
+            <p class="desc">Des petites tenues toutes douces pour affronter janvier&nbsp;: bodies, pyjamas, ensemble haut + pantalon tout moelleux, gilet en maille classique et bonnets.</p>
           </div>
-          <p class="estimation"><b>≈ 180 €</b>estimation</p>
+          <p class="estimation"><b>≈&nbsp;180&nbsp;€</b>estimation</p>
         </div>
         <div class="minis">
-          <figure class="mini" style="--scotch:#efd2c2"><img src="img/bodies.jpg" alt="" loading="lazy">5 bodies</figure>
-          <figure class="mini" style="--scotch:#b4c0a6"><img src="img/pyjamas.jpg" alt="" loading="lazy">2 pyjamas</figure>
-          <figure class="mini" style="--scotch:#dfb780"><img src="img/ensemble.jpg" alt="" loading="lazy">Ensemble hiver</figure>
-          <figure class="mini" style="--scotch:#d3c4ae"><img src="img/gilet.jpg" alt="" loading="lazy">Gilet maille</figure>
-          <figure class="mini" style="--scotch:#efd2c2"><img src="img/bonnets.jpg" alt="" loading="lazy">2 bonnets</figure>
+          <figure class="mini" style="--scotch:#efd2c2"><img src="img/bodies.jpg" width="537" height="640" alt="" loading="lazy"><figcaption>5 bodies</figcaption></figure>
+          <figure class="mini" style="--scotch:#b4c0a6"><img src="img/pyjamas.jpg" width="427" height="640" alt="" loading="lazy"><figcaption>2 pyjamas</figcaption></figure>
+          <figure class="mini" style="--scotch:#dfb780"><img src="img/ensemble.jpg" width="537" height="640" alt="" loading="lazy"><figcaption>Ensemble hiver</figcaption></figure>
+          <figure class="mini" style="--scotch:#d3c4ae"><img src="img/gilet.jpg" width="537" height="640" alt="" loading="lazy"><figcaption>Gilet maille</figcaption></figure>
+          <figure class="mini" style="--scotch:#efd2c2"><img src="img/bonnets.jpg" width="427" height="640" alt="" loading="lazy"><figcaption>2 bonnets</figcaption></figure>
         </div>
         <div class="actions">
-          <span><a class="chez" href="https://www.taokids.com/" target="_blank" rel="noopener">chez TAO ↗</a> · <a class="chez" href="https://www2.hm.com/fr_fr/bebe/nouveau-ne/vetements/tout-afficher.html" target="_blank" rel="noopener">chez H&amp;M ↗</a></span>
-          <a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a>
+          <span><a class="chez" href="https://www.taokids.com/" target="_blank" rel="noopener">chez TAO<span aria-hidden="true"> ↗</span></a> · <a class="chez" href="https://www2.hm.com/fr_fr/bebe/nouveau-ne/vetements/tout-afficher.html" target="_blank" rel="noopener">chez H&amp;M<span aria-hidden="true"> ↗</span></a></span>
+          <a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Premier%20vestiaire%20d%27hiver" target="_blank" rel="noopener">Participer</a>
         </div>
       </div>
     </section>
 
     <section aria-labelledby="veiller">
-      <div class="titre-section"><h2 id="veiller">Veiller sur lui</h2><span class="vague" aria-hidden="true"></span><span class="montant">149,99 €</span></div>
+      <div class="titre-section"><h2 id="veiller">Veiller sur lui</h2><span class="vague" aria-hidden="true"></span><span class="montant">149,99&nbsp;€</span></div>
       <div class="carte camera">
-        <a class="polaroid" href="https://www.philips.fr/c-p/SCD643_26/camera-bebe-connectee-pour-ecoute-bebe" target="_blank" rel="noopener"><img src="img/camera.jpg" alt="Caméra connectée Philips Avent SCD643" loading="lazy"><span class="prix" style="font-size:1.3rem">2e caméra</span></a>
+        <a class="polaroid" href="https://www.philips.fr/c-p/SCD643_26/camera-bebe-connectee-pour-ecoute-bebe" target="_blank" rel="noopener"><img src="img/camera.jpg" width="474" height="640" alt="Caméra connectée Philips Avent SCD643" loading="lazy"><span class="prix" style="font-size:1.3rem">2e caméra</span></a>
         <div>
           <h3>Caméra connectée Philips Avent SCD643</h3>
           <p class="variante">2e caméra pour notre babyphone Premium Connected · appli Baby Monitor+</p>
-          <p class="desc">Une petite caméra rien que pour bébé : on veillera sur ses siestes et sur celles d’Ellie depuis la même appli.</p>
-          <div class="prix-ligne"><b>149,99 €</b><a class="chez" href="https://www.philips.fr/c-p/SCD643_26/camera-bebe-connectee-pour-ecoute-bebe" target="_blank" rel="noopener">chez Philips ↗</a></div>
-          <a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a>
+          <p class="desc">Une petite caméra rien que pour bébé&nbsp;: on veillera sur ses siestes et sur celles d’Ellie depuis la même appli.</p>
+          <div class="prix-ligne"><b>149,99&nbsp;€</b><a class="chez" href="https://www.philips.fr/c-p/SCD643_26/camera-bebe-connectee-pour-ecoute-bebe" target="_blank" rel="noopener">chez Philips<span aria-hidden="true"> ↗</span></a></div>
+          <a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Cam%C3%A9ra%20connect%C3%A9e%20Philips%20Avent%20SCD643" target="_blank" rel="noopener">Participer</a>
         </div>
       </div>
     </section>
 
     <section aria-labelledby="calins">
-      <div class="titre-section"><h2 id="calins">Câlins &amp; douceurs</h2><span class="vague" aria-hidden="true"></span><span class="montant">146,93 €</span></div>
+      <div class="titre-section"><h2 id="calins">Câlins &amp; douceurs</h2><span class="vague" aria-hidden="true"></span><span class="montant">146,93&nbsp;€</span></div>
       <div class="grille quatre">
         <article class="article">
-          <a class="polaroid" href="https://www.troiskilossept.com/fr/doudou/1934-doudou-renard-leonard.html" target="_blank" rel="noopener"><img src="img/doudou.jpg" alt="Doudou Léonard le renard" loading="lazy"><span class="prix">19,99 €</span></a>
+          <a class="polaroid" href="https://www.troiskilossept.com/fr/doudou/1934-doudou-renard-leonard.html" target="_blank" rel="noopener"><img src="img/doudou.jpg" width="640" height="640" alt="Doudou Léonard le renard" loading="lazy"><span class="prix">19,99&nbsp;€</span></a>
           <h3>Doudou Léonard le renard</h3>
           <p class="variante">Trois Kilos Sept · Cache-cache en forêt</p>
           <p class="desc">Un doudou plat tout en velours, foulard moutarde et attache-sucette, pour les siestes au fond des bois.</p>
-          <div class="actions"><a class="chez" href="https://www.troiskilossept.com/fr/doudou/1934-doudou-renard-leonard.html" target="_blank" rel="noopener">chez Trois Kilos Sept ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <div class="actions"><a class="chez" href="https://www.troiskilossept.com/fr/doudou/1934-doudou-renard-leonard.html" target="_blank" rel="noopener">chez Trois Kilos Sept<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Doudou%20L%C3%A9onard%20le%20renard" target="_blank" rel="noopener">Participer</a></div>
         </article>
         <article class="article">
-          <a class="polaroid" href="https://www2.hm.com/fr_fr/bebe/nouveau-ne/vetements/tout-afficher.html" target="_blank" rel="noopener"><img src="img/trousseau.jpg" alt="Trousseau naissance" loading="lazy"><span class="prix">66,96 €</span></a>
+          <a class="polaroid" href="https://www2.hm.com/fr_fr/bebe/nouveau-ne/vetements/tout-afficher.html" target="_blank" rel="noopener"><img src="img/trousseau.jpg" width="640" height="492" alt="Trousseau naissance" loading="lazy"><span class="prix">66,96&nbsp;€</span></a>
           <h3>Trousseau naissance</h3>
           <p class="variante">3 pyjamas velours + 2 sets</p>
-          <p class="desc">Pyjama velours nounours (19,99 €), 2 pyjamas velours forêt (22,99 €), T-shirt + legging (15,99 €), bonnet + bavoir (7,99 €).</p>
-          <div class="actions"><span><a class="chez" href="https://www2.hm.com/fr_fr/bebe/nouveau-ne/vetements/tout-afficher.html" target="_blank" rel="noopener">chez H&amp;M ↗</a> · <a class="chez" href="https://www.taokids.com/" target="_blank" rel="noopener">TAO ↗</a></span><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <p class="desc">Pyjama velours nounours (19,99&nbsp;€), 2 pyjamas velours forêt (22,99&nbsp;€), T-shirt + legging (15,99&nbsp;€), bonnet + bavoir (7,99&nbsp;€).</p>
+          <div class="actions"><span><a class="chez" href="https://www2.hm.com/fr_fr/bebe/nouveau-ne/vetements/tout-afficher.html" target="_blank" rel="noopener">chez H&amp;M<span aria-hidden="true"> ↗</span></a> · <a class="chez" href="https://www.taokids.com/" target="_blank" rel="noopener">TAO<span aria-hidden="true"> ↗</span></a></span><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Trousseau%20naissance" target="_blank" rel="noopener">Participer</a></div>
         </article>
         <article class="article">
-          <a class="polaroid" href="https://jollein.com/fr/products/bib-terry-3-pack" target="_blank" rel="noopener"><img src="img/bavoirs.jpg" alt="Bavoirs naissance Jollein" loading="lazy"><span class="prix">16,99 €</span></a>
+          <a class="polaroid" href="https://jollein.com/fr/products/bib-terry-3-pack" target="_blank" rel="noopener"><img src="img/bavoirs.jpg" width="640" height="443" alt="Bavoirs naissance Jollein" loading="lazy"><span class="prix">16,99&nbsp;€</span></a>
           <h3>Bavoirs naissance Jollein</h3>
           <p class="variante">Lot de 3 · Sand, Matcha &amp; Coffee</p>
           <p class="desc">Trois bavoirs classiques en éponge douce, tons sable, sauge et café au lait, pour les premiers repas.</p>
-          <div class="actions"><a class="chez" href="https://jollein.com/fr/products/bib-terry-3-pack" target="_blank" rel="noopener">chez Jollein ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <div class="actions"><a class="chez" href="https://jollein.com/fr/products/bib-terry-3-pack" target="_blank" rel="noopener">chez Jollein<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Bavoirs%20naissance%20Jollein" target="_blank" rel="noopener">Participer</a></div>
         </article>
         <article class="article">
-          <a class="polaroid" href="https://jollein.com/fr/products/footmuff-group-0-35-points-mini-teddy-bear" target="_blank" rel="noopener"><img src="img/nid.jpg" alt="Nid d’ange cosy Mini Teddy Bear" loading="lazy"><span class="prix">42,99 €</span></a>
+          <a class="polaroid" href="https://jollein.com/fr/products/footmuff-group-0-35-points-mini-teddy-bear" target="_blank" rel="noopener"><img src="img/nid.jpg" width="640" height="443" alt="Nid d’ange cosy Mini Teddy Bear" loading="lazy"><span class="prix">42,99&nbsp;€</span></a>
           <h3>Nid d’ange cosy Mini Teddy Bear</h3>
           <p class="variante">Jollein · harnais 3/5 points</p>
-          <p class="desc">Une couverture enveloppante pour le cosy : au chaud en voiture, sans combinaison épaisse.</p>
-          <div class="actions"><a class="chez" href="https://jollein.com/fr/products/footmuff-group-0-35-points-mini-teddy-bear" target="_blank" rel="noopener">chez Jollein ↗</a><a class="participer petit" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer</a></div>
+          <p class="desc">Une couverture enveloppante pour le cosy&nbsp;: au chaud en voiture, sans combinaison épaisse.</p>
+          <div class="actions"><a class="chez" href="https://jollein.com/fr/products/footmuff-group-0-35-points-mini-teddy-bear" target="_blank" rel="noopener">chez Jollein<span aria-hidden="true"> ↗</span></a><a class="participer petit" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9%20%3A%20Nid%20d%27ange%20cosy%20Mini%20Teddy%20Bear" target="_blank" rel="noopener">Participer</a></div>
         </article>
       </div>
     </section>
@@ -460,27 +489,27 @@ section { margin-top: 64px; }
       <div class="titre-section"><h2 id="recap">Le récapitulatif</h2><span class="vague" aria-hidden="true"></span></div>
       <div class="cahier">
         <ul>
-          <li><span>En balade</span><span></span><b>1 444,64 €</b></li>
-          <li><span>Doux dodo</span><span></span><b>94,97 €</b></li>
-          <li><span>Petit vestiaire d’hiver</span><span></span><b>≈ 180 €</b></li>
-          <li><span>Veiller sur lui</span><span></span><b>149,99 €</b></li>
-          <li><span>Câlins &amp; douceurs</span><span></span><b>146,93 €</b></li>
+          <li><span>En balade</span><span></span><b>1&nbsp;444,64&nbsp;€</b></li>
+          <li><span>Doux dodo</span><span></span><b>94,97&nbsp;€</b></li>
+          <li><span>Petit vestiaire d’hiver</span><span></span><b>≈&nbsp;180&nbsp;€</b></li>
+          <li><span>Veiller sur lui</span><span></span><b>149,99&nbsp;€</b></li>
+          <li><span>Câlins &amp; douceurs</span><span></span><b>146,93&nbsp;€</b></li>
         </ul>
         <div class="total">
           <h3>Total de la liste</h3>
-          <p><b>≈ 2 020 €</b><small>soit 2 016,53 €, dont ≈ 180 € de vestiaire estimé</small></p>
+          <p><b>≈&nbsp;2&nbsp;020&nbsp;€</b><small>soit 2&nbsp;016,53&nbsp;€, dont ≈&nbsp;180&nbsp;€ de vestiaire estimé</small></p>
         </div>
-        <p class="note">Prix relevés fin octobre 2026, susceptibles d’évoluer. Les montants marqués « ≈ » sont des estimations. Toute participation, même symbolique, compte énormément pour nous.</p>
+        <p class="note">Prix relevés fin octobre 2026, susceptibles d’évoluer. Les montants marqués «&nbsp;≈&nbsp;» sont des estimations. Toute participation, même symbolique, compte énormément pour nous.</p>
       </div>
     </section>
   </main>
 
   <footer class="merci">
-    <img class="herissons" src="img/herissons.png" alt="">
-    <h2>Merci pour notre petit garçon !</h2>
+    <img class="ours" src="img/ours.svg" width="800" height="400" alt="" loading="lazy">
+    <h2>Merci pour notre petit garçon&nbsp;!</h2>
     <p>Merci de penser à lui avant même son arrivée. On a hâte de vous le présenter, bien emmitouflé dans tout ce que vous nous aurez aidés à lui offrir.</p>
     <p class="signature">Théau, Mélanie &amp; Ellie</p>
-    <a class="participer" href="https://revolut.me/theauantoine" target="_blank" rel="noopener">Participer à la cagnotte</a>
+    <a class="participer" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9" target="_blank" rel="noopener">Participer à la cagnotte</a>
     <p class="pied">~ La liste de bébé ~</p>
   </footer>
 </div>
