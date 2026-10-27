@@ -84,7 +84,7 @@ h1 {
 
 /* cagnotte */
 .cagnotte {
-  display: flex; align-items: center; gap: 28px;
+  display: flex; align-items: flex-start; gap: 28px;
   max-width: 660px; margin: 36px auto 0;
 }
 .lien-cagnotte {
@@ -98,6 +98,14 @@ h1 {
 .lien-cagnotte h2 { margin: 0; font: 400 1.7rem var(--manuscrit); color: var(--argile); }
 .lien-cagnotte p { margin: 2px 0 14px; color: var(--encre-douce); }
 .lien-cagnotte p a { color: var(--brique); font-weight: 600; }
+.virement { margin-top: 20px; padding-top: 16px; border-top: 1.5px dashed var(--argile); }
+.virement h3 { margin: 0; font: 400 1.45rem var(--manuscrit); color: var(--argile); }
+.virement p { margin: 0 0 10px; font-size: .95rem; }
+.virement dl { margin: 0; }
+.virement dt { margin-top: 8px; font-size: .74rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sauge-fonce); }
+.virement dd { margin: 0; font-weight: 600; color: var(--encre); }
+.iban { -webkit-user-select: all; user-select: all; font-variant-numeric: tabular-nums; }
+.iban span { display: inline-block; }
 .qr {
   position: relative;
   width: 132px; padding: 12px 12px 6px;
@@ -328,6 +336,15 @@ section { margin-top: 64px; }
         <h2>Lien de la cagnotte</h2>
         <p><a href="https://revolut.me/theauantoine" target="_blank" rel="noopener" translate="no">revolut.me/theauantoine</a> · le montant est libre</p>
         <a class="participer" href="https://revolut.me/theauantoine?note=Liste%20b%C3%A9b%C3%A9" target="_blank" rel="noopener">Participer sur Revolut</a>
+        <div class="virement">
+          <h3>Ou par virement</h3>
+          <p>Depuis n’importe quelle banque, sans plafond de montant.</p>
+          <dl>
+            <dt>Titulaire</dt><dd>Théau Antoine</dd>
+            <dt>IBAN</dt><dd class="iban" translate="no"><span>FR76 2823 3000 0102</span> <span>7793 5175 763</span></dd>
+            <dt>Libellé</dt><dd>Liste bébé</dd>
+          </dl>
+        </div>
       </div>
       <div class="qr">
         <img src="img/qr.svg" alt="QR code vers revolut.me/theauantoine" width="108" height="108">
